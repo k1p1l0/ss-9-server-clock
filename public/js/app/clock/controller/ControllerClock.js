@@ -16,11 +16,9 @@ function ControllerClock () {
 	  	xhttp.send();
 	}	
 
-	var key = {'text': 'Click Me'},
-		button;
-	
-	button = view.render(tpl['clock'], key, getTime);
-	id.appendChild(button);
+	var key = {'text': 'Click Me'};
+		
+	id.appendChild(view.render(tpl['clock'], key, getTime));
 
 	return this;
 }
