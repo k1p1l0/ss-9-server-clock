@@ -1,0 +1,1 @@
+tpl['tableBody'] = '<tr><td>:name</td><td>:age</td><td>:gender</td><td>:skype</td><td>:mobile</td><td>:email</td></tr>';

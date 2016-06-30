@@ -1,7 +1,8 @@
 document.addEventListener('DOMContentLoaded', init, false);
 
-var tpl = {};
-var mediator = new Mediator();
+var mediator = new Mediator(),
+	facade = new Facade(),
+	tpl = {};
 
 function init () {
 	new ControllerGroup();

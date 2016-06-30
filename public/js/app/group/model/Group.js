@@ -1,19 +1,9 @@
 function Group () {
 	var groupList = [];
 
-	groupInit();
-	
-	function groupInit () {
-		var xhttp = new XMLHttpRequest();
-
-		xhttp.addEventListener("load", function() {
-  			groupList = JSON.parse(xhttp.responseText);
-  			mediator.trigger();
-		}, false);
-
-	  	xhttp.open('GET', '/get-list', true);
-	  	xhttp.send();
-	}
+	this.set = function (array) {
+		groupList = array;
+	};
 
 	this.add = function (Student) {
 		groupList.push(Student);
