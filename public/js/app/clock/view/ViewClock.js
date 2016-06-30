@@ -1,15 +1,27 @@
 'use strict';
 
-function ViewClock (id) {
-	function render (tpl, keys, fn) {
-		var button = document.createElement('div');
+function ViewClock (parameters) {
+	init();
 
-		button.innerHTML = template(tpl, keys);
+	function init () {
+		var $button = renderButton(tpl['clock'], {'text': 'Get current time'}, parameters.fn)
 
-		button.addEventListener('click', fn);
+		parameters.$main.append($button);
 
-		return button;
+		mediator.addEventListener(renderData);
 	}
 
-	this.render = render;
+	function renderButton (tpl, keys, fn) {
+		var $button = $('<div></div>');
+
+		$button.html(template(tpl, keys));
+
+		$button.on('click', fn);
+
+		return $button;
+	}
+
+	function renderData () {
+		parameters.$time.text(parameters.model.get());
+	}
 }

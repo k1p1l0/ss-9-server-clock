@@ -4,7 +4,13 @@ function Facade () {
 
 Facade.prototype.read = function (url = '', callback = 'undefined') {
 	$.get(url, function (data) {
-  		callback(data);
+
+		if (typeof callback === 'function') {
+			callback(data);
+		} else {
+			callback = data;
+		}
+
   		mediator.trigger();
   	});
 }

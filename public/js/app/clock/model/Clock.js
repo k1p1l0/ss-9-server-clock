@@ -9,6 +9,7 @@ function Clock () {
 
 	this.set = function (value) {
 		date = value;
+		mediator.trigger();
 	};
 }
 
