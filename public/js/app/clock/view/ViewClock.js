@@ -1,14 +1,14 @@
 'use strict';
 
-function ViewClock (parameters) {
+function ViewClock ({$main, $time, model, fn}) {
 	init();
 
 	function init () {
-		var $button = renderButton(tpl['clock'], {'text': 'Get current time'}, parameters.fn)
+		var $button = renderButton(tpl['clock'], {'text': 'Get current time'}, fn)
 
-		parameters.$main.append($button);
+		$main.append($button);
 
-		mediator.addEventListener(renderData);
+		mediator.sub('read', renderData);
 	}
 
 	function renderButton (tpl, keys, fn) {
@@ -21,7 +21,7 @@ function ViewClock (parameters) {
 		return $button;
 	}
 
-	function renderData () {
-		parameters.$time.text(parameters.model.get());
+	function renderData (value) {
+		$time.text(model.get());
 	}
 }

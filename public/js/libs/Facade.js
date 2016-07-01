@@ -1,16 +1,26 @@
-function Facade () {
-	return this;
-}
+'use strict';
 
-Facade.prototype.read = function (url = '', callback = 'undefined') {
-	$.get(url, function (data) {
-
-		if (typeof callback === 'function') {
-			callback(data);
-		} else {
-			callback = data;
+var facade = ( () => {
+	const ROUTES = {
+			'getStudents': {
+				uri: '/get-list',
+				channel: 'read'
+			},
+			'getTime': {
+				uri: '/get-time',
+				channel: 'read'
+			}
 		}
 
-  		mediator.trigger();
-  	});
-}
+	function _read (routeKey = {}) {
+		var route = ROUTES[routeKey];
+
+		$.get(route.uri, function (data) {
+	  		mediator.publish(route.channel, data);
+	  	});
+	}
+
+	return {
+		read: _read
+	}	
+})();

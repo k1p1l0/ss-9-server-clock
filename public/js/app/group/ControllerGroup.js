@@ -1,12 +1,16 @@
+'use strict';
+
 function ControllerGroup () {
-	var parameters = {
+	let parameters = {
 			data: new Group(),
 			$container: $('#container')
 		}
 
-	facade.read('/get-list', parameters.data.set);
+	facade.read('getStudents');
 
-	mediator.addEventListener(function() {
+	mediator.subscribe('read', students => {
+		parameters.data.set(students);
+
 		new ViewGroup(parameters);
 	});
 }

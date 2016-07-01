@@ -3,13 +3,19 @@
 function Clock () {
 	var date = '00:00:00';
 
-	this.get = function () {
-		return date;
-	};
+	mediator.sub('read', set);
 
-	this.set = function (value) {
+	function get () {
+		return date;
+	}
+
+	function set (value) {
 		date = value;
-		mediator.trigger();
-	};
+	}
+
+	this.set = set;
+	this.get = get;
+
+	return this;
 }
 

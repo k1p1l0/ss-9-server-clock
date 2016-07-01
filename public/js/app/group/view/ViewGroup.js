@@ -1,9 +1,7 @@
-function ViewGroup (parameters) {
-	initialize();
+'use strict';
 
-	function initialize () {
-		parameters.$container.html(createTable());
-	}
+function ViewGroup ({data, $container}) {
+	$container.html(createTable());
 
 	function createTable () {
 		var	fragments = {},
@@ -12,18 +10,18 @@ function ViewGroup (parameters) {
 		fragments = {
 			tableHeader: {
 				header: '<thead>',
-				body: createTableHeader(parameters.data.getStudentsKeys()),
+				body: createTableHeader(data.getStudentsKeys()),
 				footer: '</thead>'
 			},
 			tableBody: {
 				header: '<tbody>',
-				body: createBody(parameters.data),
+				body: createBody(data),
 				footer: '</tbody>'
 			}
 			,
 			tableFooter: {
 				header: '<tfoot>',
-				body: createTableFooter(parameters.data.getLength()),
+				body: createTableFooter(data.getLength()),
 				footer: '</tfoot>'
 			}
 		};

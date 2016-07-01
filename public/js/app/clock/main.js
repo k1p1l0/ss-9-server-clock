@@ -1,9 +1,8 @@
-document.addEventListener('DOMContentLoaded', init, false);
+'use strict';
 
-var mediator = new Mediator(),
-	facade = new Facade(),
-	tpl = {};
+let tpl = {};
 
-function init () {
+$(() => {
 	new ControllerClock();
-}
+});
+
