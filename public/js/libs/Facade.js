@@ -16,6 +16,7 @@ var facade = ( () => {
 		var route = ROUTES[routeKey];
 
 		$.get(route.uri, function (data) {
+			console.log(data);
 	  		mediator.publish(route.channel, data);
 	  	});
 	}

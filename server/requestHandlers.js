@@ -1,52 +1,27 @@
 var fs = require('fs'),
 	Clock = require('./libs/Clock'),
-    Student = require('./libs/Student');
+    Student = require('./libs/Student'),
+    static = require('./libs/static');
 
-// Handler for index.html page
-function getIndex (response, uri) {
-    fs.readFile('../public/index.html', function (err, data) {
-    	response.writeHead(200, {"Content-Type": "text/html"});
+function getFile (response, uri) {
+    fs.readFile(static.path + uri, function (err, data) {
+        if (uri.slice(-3) === 'css') {
+            response.writeHead(200, {"Content-Type": "text/css"});
+        } else if (uri.slice(-2) === 'js') {
+            response.writeHead(200, {"Content-Type": "text/javascript"});
+        } else if (uri.slice(-4) === 'html') {
+            response.writeHead(200, {"Content-Type": "text/html"});
+        }
         response.write(data);
         response.end();
     });
 }
 
-// Handler for group.html page
-function getGroupList (response, uri) {
-    fs.readFile('../public/group.html', function (err, data) {
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.write(data);
-        response.end();
-    });
-}
-
-// Handler for Ajax requests
-function getTime (response) {
-	var cl = new Clock();
-
-    response.writeHead(200, {"Content-Type": "text/html"});
-	response.write(cl.normalize());
+function getTime (response) {    
+    response.writeHead(200, {"Content-Type": "application/json"});
+	response.write(JSON.stringify(new Clock().normalize()));
     response.end();
 }
-
-// Handler for JS files
-function getJs (response, uri) {
-    fs.readFile('../public' + uri, function (err, data) {
-        response.writeHead(200, {"Content-Type": "text/plain"});
-        response.write(data);
-        response.end();
-    });
-}
-
-// Handler for CSS files
-function getCss (response, uri) {
-    fs.readFile('../public' + uri, function (err, data) {
-        response.writeHead(200, {"Content-Type": "text/css"});
-        response.write(data);
-        response.end();
-    });
-}
-
 
 function getList (response, uri) {
     var studentArray = [];
@@ -64,11 +39,6 @@ function getList (response, uri) {
 }
 
 
-exports.index = getIndex;
-exports.group = getGroupList;
-
-exports.js = getJs;
-exports.css = getCss;
-
+exports.getFile = getFile;
 exports.getTime = getTime;
 exports.getList = getList;

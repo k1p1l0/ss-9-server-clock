@@ -4,15 +4,13 @@ var server = require('./server'),
 	handle = {};
 
 // Request for pages
-handle['/'] = requestHandlers.group;
-handle['/index.html'] = requestHandlers.index;
+handle['/'] = '/group.html';
 
 // Request for data (array, time) API
 handle['/get-time'] = requestHandlers.getTime;
 handle['/get-list'] = requestHandlers.getList;
 
-// for requests files
-handle['js'] = requestHandlers.js;
-handle['css'] = requestHandlers.css;
+// for requests static files
+handle['getFile'] = requestHandlers.getFile;
 
 server.start(router.route, handle);
